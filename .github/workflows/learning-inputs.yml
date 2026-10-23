@@ -1,0 +1,42 @@
+name: Learning Inputs Workflow 
+
+# 1. This defines the manual trigger and your input parameters
+on:
+  workflow_dispatch:
+    inputs:
+      target_environments:
+        description: 'Choose the target environment'
+        required: true
+        default: 'staging'
+        type: choice
+        options:
+          - staging
+          - production
+          - testing
+        debug_mode:
+          description: 'Enable verbose debug logging?'
+          required: false
+          default: false
+          type: boolean
+
+jobs:
+  run-sysadmin-checks:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print input parameters
+        run: |
+          echo "=========================================="
+          echo "Target Environment: ${{ github.event.inputs.target_environment }}"
+          echo "Debug Mode Enabled: ${{ github.event.inputs.debug_mode }}"
+          echo "=========================================="        
+
+      - name: Run basic runner diagnostics
+        run: |
+          echo "Checking runner OS and kernel version..."
+          uname -a
+          echo "Checking available disk space..."
+          df -Th
+          echo "Checking active network interfaces..."
+          ip a
+
+      

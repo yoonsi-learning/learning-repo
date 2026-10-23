@@ -13,11 +13,11 @@ on:
           - staging
           - production
           - testing
-    debug_mode:
-      description: 'Enable verbose debug logging?'
-      required: false
-      default: false
-      type: boolean
+      debug_mode:
+        description: 'Enable verbose debug logging?'
+        required: false
+        default: false
+        type: boolean
 
 jobs:
   run-sysadmin-checks:
